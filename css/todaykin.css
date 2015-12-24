@@ -3,17 +3,34 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 	padding:0;
 }
 
-#horizontalMovingBox{
-	float:left;
-	height: 1500px;
-	width: 800px;
-	position: absolute;
+.navbar {
+	position:fixed;
+	height: 100px;
+	width: 100%;
+	background: black;
+	z-index: 1;
 }
 
-#horizontalMovingBox div{
-	float:left;
-	height: 1500px;
-	width: 200px;
-	vertical-align: middle;
+#container{
+	top:100px;
+	margin:auto;
+	position: relative;
+	width: 90%;
+	height: 90%;
+	background: grey;
 }
 
+#event-container{
+	top:100px;
+	margin:auto;
+	position: relative;
+	width: 90%;
+}
+
+#event-container div{
+	float:left;
+}
+
+.h1{
+	text-align: center;
+}

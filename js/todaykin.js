@@ -1,11 +1,14 @@
 var TODAYKIN = (function(){
-
-	var todaykin = {}; //top namespace
-	var that = todaykin // that = todaykin
-	that.init = function(){ 
+	'use strict';
+	var todaykin = {}; //top namespace under window
+	var that = todaykin; // that = todaykin
+	that.gvariable = {};
+	that.init = function(){
+		that.view.init(); 
 		that.move.init();
-	}
-	return todaykin;
+		that.column.init();
+	};
+	return that;
 })();
 
 $(document).ready(function(){

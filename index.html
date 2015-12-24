@@ -3,16 +3,19 @@
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/todaykin.js"> </script>
+	<script src="js/view.js"></script>	
 	<script src="js/move.js"> </script>
+	<script src="js/column.js"></script>
 	<link href="css/todaykin.css" rel='stylesheet' type='text/css' />
 </head>
-<body>
-	<button>click</button>
-	<div id="horizontalMovingBox">
-		<div>box1</div>
-		<div>box2</div>
-		<div>box3</div>
-		<div>box4</div>
+<body>	
+	<div class="navbar">
+		<button id="button-right">right-click</button>
+		<button id="button-left">left-click</button>
+	</div>
+	<div id="container">
+		<div id="event-container">
+		</div>
 	</div>
 </body>
 </html>
