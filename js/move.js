@@ -6,13 +6,19 @@ var TODAYKIN = (function(module){
 		that.UIMovementSet();
 	};
 
+	that.moveRight = function(){
+		$('#event-container').animate({left: "+=250px"});
+		module.gvariable.columnCursor--;
+		module.DrawColumns();
+	}
+	that.moveLeft = function(){
+		$('#event-container').animate({left:"-=250px"});
+		module.gvariable.columnCursor++;
+	}
+
 	module.move.UIMovementSet = function(){
-		$('#button-right').click(function(){
-			$('#event-container').animate({left: "+=250px"});
-		});
-		$('#button-left').click(function(){
-			$('#event-container').animate({left:"-=250px"});
-		});
+		$('#button-right').click(that.moveRight);
+		$('#button-left').click(that.moveLeft);
 	};
 
 	return module;

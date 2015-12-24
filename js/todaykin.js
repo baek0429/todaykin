@@ -2,11 +2,16 @@ var TODAYKIN = (function(){
 	'use strict';
 	var todaykin = {}; //top namespace under window
 	var that = todaykin; // that = todaykin
-	that.gvariable = {};
 	that.init = function(){
+		that.getGlobalVariable();
 		that.view.init(); 
-		that.move.init();
 		that.column.init();
+		that.move.init();
+	};
+
+	that.getGlobalVariable = function(){
+		that.gvariable = {};
+		that.gvariable.columnCursor = 5;
 	};
 	return that;
 })();

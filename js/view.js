@@ -4,13 +4,11 @@ var TODAYKIN = (function(module){
 	module.view ={
 		init:function(){
 			var that = this; // that = module.view;
-			module.gvariable = {};
 			that.getViewVariable();
 			that.getBodyMeasure();
 
 			window.onresize = function(event){
 				that.resizeEventCalled();
-				that.getBodyMeasure();
 			};
 		},
 		getBodyMeasure : function(){
@@ -24,8 +22,8 @@ var TODAYKIN = (function(module){
 		resizeEventCalled: function(){
 			var that = this;
 			that.getViewVariable();
-			module.column.clean();
-			module.column.init();
+			that.getBodyMeasure();
+			module.DrawColumns();
 		}
 	};
 
