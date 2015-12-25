@@ -57,7 +57,7 @@ var TODAYKIN = (function(module){
 			}
 			that.getAdjustedColumnWidthHeight(column); 
 			sumColumnWith = (sumColumnWith + that.variable.a_columnWidth);
-			if(sumColumnWith > module.gvariable.width_body -100){ // ignore after 
+			if(sumColumnWith > 0.95*module.gvariable.width_body  ){ // ignore after 
 				return false;
 			}
 			$("#event-container").append('<div id=column'+i+'><h1>'+i+'</h1></div>')
