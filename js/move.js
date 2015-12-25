@@ -2,18 +2,25 @@ var TODAYKIN = (function(module){
 	'use strict';
 	module.move = {}; // sub-namespace under main namespace todaykin{} in todaykin.js
 	var that = module.move;
-	module.move.init = function(){
+	that.init = function(){
 		that.UIMovementSet();
 	};
 
 	that.moveRight = function(){
-		$('#event-container').animate({left: "+=250px"});
-		module.gvariable.columnCursor--;
-		module.DrawColumns();
+		var info = module.getColumnWidthAtCursor(module.gvariable.columnCursor); // [width,height] at cursor.
+		$('#event-container').animate({left: "+="+info[0]},500, function() {
+			$('#event-container').css("left",0);
+			module.gvariable.columnCursor--;
+			module.DrawColumns();
+		});
 	}
 	that.moveLeft = function(){
-		$('#event-container').animate({left:"-=250px"});
-		module.gvariable.columnCursor++;
+		var info = module.getColumnWidthAtCursor(module.gvariable.columnCursor); // [width,height] at cursor.
+		$('#event-container').animate({left:"-="+info[0]},500, function() {
+			$('#event-container').css("left",0);
+			module.gvariable.columnCursor++;
+			module.DrawColumns();
+		});
 	}
 
 	module.move.UIMovementSet = function(){

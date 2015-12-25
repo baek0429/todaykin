@@ -12,6 +12,8 @@ var TODAYKIN = (function(){
 	that.getGlobalVariable = function(){
 		that.gvariable = {};
 		that.gvariable.columnCursor = 5;
+		that.gvariable.a_columnWith = 350;
+		that.gvariable.a_columnHeight = 1000;
 	};
 	return that;
 })();

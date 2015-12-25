@@ -47,23 +47,58 @@ var TODAYKIN = (function(module){
 	module.DrawColumns = function(){
 		var columns = that.columns // copy.
 		var sumColumnWith = 0;
+		var cursor = module.gvariable.columnCursor;
+		console.log(cursor);
 		$("#event-container > div").remove();
 		$.each(columns,function(i,column){
-			var adjustedWidth = column.width*module.gvariable.ratio;
-			var adjustedHeight = column.height*module.gvariable.ratio;
-			sumColumnWith = (sumColumnWith + adjustedWidth); //- (adjustedWidth*module.gvariable.columnCursor);
-			if(sumColumnWith > module.gvariable.width_body -100){
-				return;
+			$('event-container').css("left",0);
+			if(i<cursor){ // ignore before cursor
+				return true; // continue.
+			}
+			that.getAdjustedColumnWidthHeight(column); 
+			sumColumnWith = (sumColumnWith + that.variable.a_columnWidth);
+			if(sumColumnWith > module.gvariable.width_body -100){ // ignore after 
+				return false;
 			}
 			$("#event-container").append('<div id=column'+i+'><h1>'+i+'</h1></div>')
-			$('#column'+i).css("width",adjustedWidth).css("height",1500);
-			$.each(column.rows,function(j,row){
+			$('#column'+i).css("width",that.variable.a_columnWidth).css("height",1500);
+			$.each(column.rows,function(j,row){	
 				$('#column'+i).append('<div id=row'+j+'>'+"row"+'</div>')
 				$('#column'+i+' #row'+j)
-				.css("height",adjustedHeight)
-				.css("width",adjustedWidth);
+				.css("height",that.variable.a_columnHeight)
+				.css("width",that.variable.a_columnWidth);
 			});
 		});
+	}
+
+	module.DrawAddition = function(cursor){
+		var columns = that.columns;
+		$('#event-container').append('<div id=column'+cursor+'><h1>'+cursor+'</h1></div>');
+	}
+
+	that.relocateIfResize = function(){
+		var cursor = module.gvariable.columnCursor;
+		var sumWith = 0;
+		$.each(that.columns,function(i,v){
+			if(cursor >= i){
+				return;
+			}else{
+				sumWith = sumWith + v.width;
+				sumWith = sumWith*module.gvariable.ratio;
+			}
+		})
+		$("#event-container").css("left", sumWith);
+	}
+
+	that.getAdjustedColumnWidthHeight = function(column){
+		that.variable.a_columnWidth = column.width*module.gvariable.ratio;
+		that.variable.a_columnHeight = column.height*module.gvariable.ratio;
+	}
+
+	module.getColumnWidthAtCursor = function(cursor){
+		var width = that.columns[cursor].width*module.gvariable.ratio; //that.variable.a_columnWidth;
+		var height = that.columns[cursor].height*module.gvariable.ratio; //that.variable.a_columnWidth;
+		return [width,height];
 	}
 
 	// with following function I can make {that}.[columns].{column}.[rows].{row} structure;
@@ -98,33 +133,6 @@ var TODAYKIN = (function(module){
 	that.cleanColumns = function(columns){
 		that.columns = [];
 	};
-
-
-	// that.clean = function(){
-	// 	$("#event-container > div").remove();
-	// }
-
-	// that.createEmptyColumnNRow = function(){
-	// 	var adjustedWidth = that.variable.a_columnWidth;
-	// 	var adjustedHeight = that.variable.a_columnHeight;
-	// 	var maxHeight = 0;
-	// 	var columnN = that.variable.columnN; // shorcut
-	// 	for (var i =0 ; i<columnN+1;i++){
-	// 		if (maxHeight<adjustedHeight*(that.variable.rowN[i])){
-	// 			maxHeight = adjustedHeight*(that.variable.rowN[i]);
-	// 		}
-	// 		$("#event-container").append('<div class=column' + i + ' id=column><h1>'+i+'</h1></div>')
-	// 		$('.column'+i).css("width",adjustedWidth);
-	// 		for(var j =0 ; j<that.variable.rowN[i];j++){
-	// 			$('.column'+i).append('<div class=row'+j+'>'+"row"+'</div>')
-	// 			$('.column'+i+" "+'.row'+j)
-	// 			.css("height",adjustedHeight)
-	// 			.css("width",adjustedWidth);
-	// 		};
-	// 	};
-	// 	console.log(maxHeight);
-	// 	$('#event-container > #column').css("minHeight",maxHeight);
-	// };
 
 	that.getRowN = function(){
 		that.variable.rowN = [3,1,2,4,8,12,1,2,3,4]
