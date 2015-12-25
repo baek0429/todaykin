@@ -46,7 +46,7 @@ var TODAYKIN = (function(module){
 
 	module.DrawColumns = function(){
 		var columns = that.columns // copy.
-		var sumColumnWith = 0;
+		var sumColumnWidth = 0;
 		var cursor = module.gvariable.columnCursor;
 		console.log(cursor);
 		$("#event-container > div").remove();
@@ -56,24 +56,20 @@ var TODAYKIN = (function(module){
 				return true; // continue.
 			}
 			that.getAdjustedColumnWidthHeight(column); 
-			sumColumnWith = (sumColumnWith + that.variable.a_columnWidth);
-			if(sumColumnWith > 0.95*module.gvariable.width_body  ){ // ignore after 
+			sumColumnWidth = (sumColumnWidth + that.variable.a_columnWidth);
+			if(sumColumnWidth > 0.75*module.gvariable.width_body  ){ // ignore after 
+				$('.columnviewwidth').css("width",sumColumnWidth - that.variable.a_columnWidth);
 				return false;
 			}
 			$("#event-container").append('<div id=column'+i+'><h1>'+i+'</h1></div>')
 			$('#column'+i).css("width",that.variable.a_columnWidth).css("height",1500);
 			$.each(column.rows,function(j,row){	
-				$('#column'+i).append('<div id=row'+j+'>'+"row"+'</div>')
+				$('#column'+i).append('<div id=row'+j+'>'+(row.title)+'</div>')
 				$('#column'+i+' #row'+j)
 				.css("height",that.variable.a_columnHeight)
 				.css("width",that.variable.a_columnWidth);
 			});
 		});
-	}
-
-	module.DrawAddition = function(cursor){
-		var columns = that.columns;
-		$('#event-container').append('<div id=column'+cursor+'><h1>'+cursor+'</h1></div>');
 	}
 
 	that.relocateIfResize = function(){
@@ -110,7 +106,7 @@ var TODAYKIN = (function(module){
 
 	// similarly constructor
 	that.newRow = function(width,height){
-		return {width:width, height:height}
+		return {title:Math.random(), width:width, height:height}
 	};
 
 	// column added to []columns

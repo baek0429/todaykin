@@ -3,8 +3,15 @@ var TODAYKIN = (function(module){
 	module.move = {}; // sub-namespace under main namespace todaykin{} in todaykin.js
 	var that = module.move;
 	that.init = function(){
+		that.variable={};
 		that.UIMovementSet();
 	};
+
+	that.UIMovementSet = function(){
+		$('.button-right').click(that.moveRight);
+		$('.button-left').click(that.moveLeft);
+	};
+
 
 	that.moveRight = function(){
 		if(module.gvariable.columnCursor == 0){
@@ -34,10 +41,16 @@ var TODAYKIN = (function(module){
 		return;
 	}
 
-	module.move.UIMovementSet = function(){
-		$('#button-right').click(that.moveRight);
-		$('#button-left').click(that.moveLeft);
-	};
-
+	that.moveAbout = function(){
+		if(that.variable.about_switch ===true){
+			$('#navbar').animate({height:"-="+600},200, function(){
+			}).css("z-index",1);
+			that.variable.about_switch = false;
+		}else{
+			$('#navbar').animate({height:"+="+600},500, function(){
+			}).css("z-index",1);
+			that.variable.about_switch = true;
+		}
+	}
 	return module;
 })(TODAYKIN);

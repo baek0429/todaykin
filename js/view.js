@@ -6,10 +6,15 @@ var TODAYKIN = (function(module){
 			var that = this; // that = module.view;
 			that.getViewVariable();
 			that.getBodyMeasure();
+			that.applyMeasureToDiv();
 
 			window.onresize = function(event){
 				that.resizeEventCalled();
 			};
+		},
+		applyMeasureToDiv : function(){
+			$('.widewidth').css("width",module.gvariable.width_body);
+			$('#button-container').css("width",module.gvariable.width_body);
 		},
 		getBodyMeasure : function(){
 			module.gvariable.width_body = $('body').width();
@@ -23,6 +28,7 @@ var TODAYKIN = (function(module){
 			var that = this;
 			that.getViewVariable();
 			that.getBodyMeasure();
+			that.applyMeasureToDiv();
 			module.DrawColumns();
 		}
 	};
