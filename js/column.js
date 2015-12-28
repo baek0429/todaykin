@@ -7,6 +7,7 @@ var TODAYKIN = (function(module){
 		that.variable = {
 			def_columnWidth : 350,
 			def_columnHeight: 200,
+			def_columnsHeight: 650,
 			a_columnWidth: 0,
 			a_columnHeight: 0,
 			defaultColumnN : 4,
@@ -51,39 +52,37 @@ var TODAYKIN = (function(module){
 		console.log(cursor);
 		$("#event-container > div").remove();
 		$.each(columns,function(i,column){
+			var sumColumnsHeight = 0;
 			$('event-container').css("left",0);
 			if(i<cursor){ // ignore before cursor
 				return true; // continue.
 			}
 			that.getAdjustedColumnWidthHeight(column); 
-			sumColumnWidth = (sumColumnWidth + that.variable.a_columnWidth);
+			sumColumnWidth = (sumColumnWidth + that.variable.a_columnWidth); 
 			if(sumColumnWidth > 0.75*module.gvariable.width_body  ){ // ignore after 
-				$('.columnviewwidth').css("width",sumColumnWidth - that.variable.a_columnWidth);
+				$('.columnviewwidth').css("width",sumColumnWidth - that.variable.a_columnWidth); // update the css param for normal width.
+				$('.halfcolumnviewwidth').css("width",(sumColumnWidth - that.variable.a_columnWidth)/2);
 				return false;
 			}
 			$("#event-container").append('<div id=column'+i+'><h1>'+i+'</h1></div>')
-			$('#column'+i).css("width",that.variable.a_columnWidth).css("height",1500);
+			
+			$('#column'+i).css("width",that.variable.a_columnWidth)
+			.css("height",that.variable.def_columnsHeight*module.gvariable.ratio); // assign the column width and height
+
 			$.each(column.rows,function(j,row){	
-				$('#column'+i).append('<div id=row'+j+'>'+(row.title)+'</div>')
+				sumColumnsHeight = sumColumnsHeight + that.variable.a_columnHeight;
+				$('#column'+i).append('<div id=row'+j+'>'+(row.title)+'</div>');
 				$('#column'+i+' #row'+j)
 				.css("height",that.variable.a_columnHeight)
 				.css("width",that.variable.a_columnWidth);
+				if(j>2){
+					sumColumnsHeight = sumColumnsHeight - 100; // if 'show more' column should be resized.
+					$('#column'+i+' #row'+j).hide(); 
+					$('#column'+i).append('<p>show more</p>').css("height",sumColumnsHeight);
+					return false;
+				}
 			});
 		});
-	}
-
-	that.relocateIfResize = function(){
-		var cursor = module.gvariable.columnCursor;
-		var sumWith = 0;
-		$.each(that.columns,function(i,v){
-			if(cursor >= i){
-				return;
-			}else{
-				sumWith = sumWith + v.width;
-				sumWith = sumWith*module.gvariable.ratio;
-			}
-		})
-		$("#event-container").css("left", sumWith);
 	}
 
 	that.getAdjustedColumnWidthHeight = function(column){

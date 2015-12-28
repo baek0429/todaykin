@@ -1,17 +1,68 @@
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
 	margin:0;
 	padding:0;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 #navbar {
 	position:fixed;
-	height: 100px;
+	padding-top: 15px;
+	height: 45px;
 	background: black;
 	z-index: 1;
+}
+
+#login-container{
+	float: right;
+	display: block;
+	width: 250px;
+	min-height: 40px;
+}
+
+#logo-container{
+	float: left;
+	display: block;
+	width: 300px;
+	min-height: 40px;
+}
+
+#searchbox-container{
+	float: left;
+	display: block;
+	z-index: 3;
+}
+
+#searchbox1 {
+	padding:8px 15px;
+	width: 500px;
+	background:rgba(255,255,255,0.4);
+	border:0px solid #dbdbdb;
+}
+
+#searchbox2 {
+	padding:8px 15px;
+	width: 150px;
+	background:rgba(255,255,255,0.4);
+	border:0px solid #dbdbdb;
+}
+
+.columnviewwidth{
+	margin: 0 auto;
+}
+
+.padding-top{
+	padding-top: 35px;
+}
+
+.halfcolumnviewwidth{
+	margin: 0 auto;
+	float: left;
+	display: block;
 }
 
 .button-container{
 	position: relative;
 	height: 50px;
+	margin: 0 auto
 }
 
 .button-left{
@@ -22,7 +73,6 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 	background-repeat: no-repeat;
 	float: left;
 	display: block;
-	margin: 0 auto;
 }
 .button-right{
 	height: 35px;
@@ -35,10 +85,11 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 	margin: 0 auto;
 }
 .buttons{
+	float: left;
+	display: block;
 	padding-top: 10px;
 	width: 105px;
 	height: 35px;
-	margin: 0 auto;
 }
 
 #body{
@@ -46,7 +97,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 }
 
 #container{
-	top:100px;
+	top:60px;
 	position: relative;
 	overflow:hidden;
 }
@@ -54,8 +105,9 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 #event-container{
 	position: relative;
 	overflow:hidden;
-	padding-top: 150px;
+	padding-top: 15px;
 	margin: 0 auto;
+	min-height: 800px;
 }
 
 #event-container div{
@@ -64,4 +116,9 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 
 .h1{
 	text-align: center;
+}
+
+#footer {
+	background: grey;
+	min-height: 600px;
 }
